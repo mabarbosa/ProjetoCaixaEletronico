@@ -1,0 +1,6 @@
+Este directorio contiene los ficheros necesarios para arrancar la compilación
+con ant. Una vez arrancada, se descargan/instalan los demás ficheros
+necesarios.
+
+maven-artifact-ant-2.0.2-dep.jar   Contiene las tareas Ant que permiten invocar
+                              comandos Maven para bajar e instalar dependencias

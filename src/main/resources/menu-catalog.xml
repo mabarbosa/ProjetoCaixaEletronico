@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="menu-catalog.xsd">
+
+<menuItem id="1" action="" labelKey="menu.labelKey.pilotoIntranet">
+	<!-- <link labelKey="Ajuda" action="#{helpBean.getHelpAction}" link="" /> -->
+	<menuItem id="2" action="" actionListener="" labelKey="menu.labelKey.componentesApresentacao">
+		<menuItem id="3" labelKey="menu.labelKey.customizados" title="Customizados" />
+		<menuItem id="4" action="presCustom_components_1.jsf" labelKey="menu.labelKey.command" />
+		<menuItem id="4" action="presCustom_components_2.jsf" labelKey="menu.labelKey.graphic"  />
+		<menuItem id="4" action="presCustom_components_3.jsf" labelKey="menu.labelKey.input" />
+	</menuItem>
+	<menuItem id="2" action="" labelKey="menu.labelKey.paginationCorpSessao" title="menu.labelKey.paginationCorpSessao">
+		<menuItem id="3" labelKey="menu.labelKey.paginationCorp" title="Paginacao"/>
+		<menuItem id="4" action="#{pageCorpBean.iniciarProdutoServico}" actionListener="#{pageCorpBean.iniciarPaginacao}" labelKey="menu.labelKey.pdcdatascroller" />
+		<menuItem id="4" action="#{pageCorpBean.awbDataScroller}" actionListener="#{pageCorpBean.iniciarPaginacao}" labelKey="menu.labelKey.awbdatascroller" />
+	</menuItem>
+	<menuItem id="2" action="" labelKey="menu.labelKey.configuracoes" title="menu.labelKey.configuracoes" allowedRoles="ROLE_MENU_TEST" showForNotAllowedRoles="false">
+		<menuItem id="3" labelKey="menu.labelKey.preferencias" title="Preferências"/>
+		<menuItem id="4" action="changePass.jsf"  labelKey="menu.labelkey.mudarsenha" />
+	</menuItem>
+</menuItem>
+</menu>
