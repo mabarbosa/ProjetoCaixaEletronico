@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.usjt.model.entidades.ClienteVO;
-import br.com.usjt.model.jdbc.Conexao;
+import br.com.usjt.model.factory.ConnectionFactory;
 
 
 /**
@@ -40,13 +40,10 @@ public class ClienteDAO {
 	 * copyright Copyright (c) 2013 <br> * </p>
 	 * @param data the DataSource
 	 */
-	public ClienteDAO(Conexao data) {
-		try {
-			this.conexao = data.getConnection();
-		} catch (Exception e) {
-			//TODO Trocar por log
-			e.printStackTrace();
-		}
+	public ClienteDAO(Connection connection) {
+
+		this.conexao = connection;
+
 	}
     
     /**
@@ -56,17 +53,11 @@ public class ClienteDAO {
      * @author sergio.junior  <br> 
      * copyright Copyright (c) 2015 <br> * </p>
      */
-    public ClienteDAO() {
-		try {
-			
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-			
-		} catch (Exception e) {
-			// TODO Trocar por log
-			e.printStackTrace();
-		}
-	} 
+	public ClienteDAO() {
+
+		this.conexao = ConnectionFactory.getConnection();
+
+	}
 
 	/**
 	 * Nome: cadastrar
@@ -87,7 +78,7 @@ public class ClienteDAO {
 //            preparador.setString(3, usuario.getSenha());
             preparador.execute();//execulta o codigo sql
             preparador.close();//fecha conexao com bando banco
-            System.out.println("cADASTRADO COM SUCESSO");
+            System.out.println("CADASTRADO COM SUCESSO");
         } catch (SQLException ex) {
             System.out.println("Erro inserir");
         }

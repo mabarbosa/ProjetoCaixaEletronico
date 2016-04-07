@@ -115,7 +115,6 @@ public class TelaHome extends Tela {
 		 * @param e
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Verifica qual tela deve ser exibida
 			if (e.getSource() == btn_saque) {

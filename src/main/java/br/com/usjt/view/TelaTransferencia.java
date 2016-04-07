@@ -5,9 +5,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import br.com.usjt.model.entidades.TransferenciaVO;
-import br.com.usjt.model.negocio.Transferencia;
+import br.com.usjt.model.negocio.TransferenciaBO;
+import br.com.usjt.security.DadosLogin;
 import br.com.usjt.utils.BundleUtils;
-import br.com.usjt.utils.DadosLogin;
 import br.com.usjt.view.arq.Tela;
 
 import java.awt.event.*;
@@ -150,7 +150,7 @@ public class TelaTransferencia extends Tela {
 		/**
 		 *
 		 */
-		private Transferencia tranferencia = null;
+		private TransferenciaBO tranferencia = null;
 
 		/**
 		 * Nome:
@@ -163,7 +163,7 @@ public class TelaTransferencia extends Tela {
 		 */
 		public TransferenciaController() {
 			super();
-			tranferencia = new Transferencia();
+			tranferencia = new TransferenciaBO();
 		}
 
 		/**
@@ -175,7 +175,6 @@ public class TelaTransferencia extends Tela {
 		 * @param e
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
-		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == confirmar) {

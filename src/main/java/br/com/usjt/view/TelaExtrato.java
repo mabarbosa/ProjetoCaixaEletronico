@@ -19,8 +19,9 @@ import javax.swing.border.*;
 import br.com.usjt.model.dao.ContaDAO;
 import br.com.usjt.model.dao.OperacaoDAO;
 import br.com.usjt.model.entidades.ContaVO;
+import br.com.usjt.model.negocio.ExtratoBO;
+import br.com.usjt.security.DadosLogin;
 import br.com.usjt.utils.BundleUtils;
-import br.com.usjt.utils.DadosLogin;
 import br.com.usjt.view.arq.Tela;
 
 /**
@@ -94,12 +95,12 @@ public class TelaExtrato extends Tela
 							 BundleUtils.getString("label.tela.extrato.numero"),
 							 BundleUtils.getString("label.tela.extrato.valor") };
 
-		OperacaoDAO operacao = new OperacaoDAO();
+		ExtratoBO extrato = new ExtratoBO();
 
 		ContaDAO contaDao = new ContaDAO();
 		ContaVO conta = contaDao.buscarSaldo(DadosLogin.banco, DadosLogin.agencia, DadosLogin.conta );
 
-		Object[][] dados = operacao.getExtrato(conta);
+		Object[][] dados = extrato.getExtrato(conta);
 
 		tabela = new JTable(dados, colunas);
 

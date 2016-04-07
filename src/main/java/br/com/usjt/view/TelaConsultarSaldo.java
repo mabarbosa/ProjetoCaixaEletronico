@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 import javax.swing.border.*;
 
-import br.com.usjt.model.negocio.Conta;
+import br.com.usjt.model.negocio.ContaBO;
 import br.com.usjt.utils.BundleUtils;
 import br.com.usjt.view.arq.Tela;
 
@@ -32,7 +32,7 @@ public class TelaConsultarSaldo extends Tela {
 	/**
 	 *Classe de neogcio
 	 */
-	private Conta contaBO = null;
+	private ContaBO contaBO = null;
 	/**
 	 *
 	 */
@@ -58,7 +58,7 @@ public class TelaConsultarSaldo extends Tela {
 	public TelaConsultarSaldo() {
 
 		super();
-		contaBO = new Conta();
+		contaBO = new ContaBO();
 
 		buildObjects();
 		Container con = this.getContentPane();
@@ -130,7 +130,6 @@ public class TelaConsultarSaldo extends Tela {
 		 * @param e
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			new TelaHome();
 			TelaConsultarSaldo.this.dispose();

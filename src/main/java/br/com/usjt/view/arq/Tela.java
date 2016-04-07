@@ -14,7 +14,7 @@ import java.awt.*;
 
 import javax.swing.border.*;
 
-import br.com.usjt.model.negocio.Cliente;
+import br.com.usjt.model.negocio.ClienteBO;
 import br.com.usjt.utils.BundleUtils;
 
 /**
@@ -38,7 +38,7 @@ public class Tela extends JFrame {
 	private JLabel nome, aux;
 
 
-	private Cliente cliente = null;
+	private ClienteBO cliente = null;
 	/**
 	 * Nome:Tela
 	 * <p>PropÃ³sito: Metodo responsavel por construir os objetos</p>
@@ -48,7 +48,7 @@ public class Tela extends JFrame {
 	 *
 	 */
 	public Tela() {
-		cliente = new Cliente();
+		cliente = new ClienteBO();
 		buildObjects();
 
 		JPanel north = new JPanel();
@@ -77,7 +77,7 @@ public class Tela extends JFrame {
 	 */
 	private void buildObjects() {
 
-		nome = new JLabel(BundleUtils.getString("label.tela.main.ident") + cliente.buscaClienteLogado());
+		//nome = new JLabel(BundleUtils.getString("label.tela.main.ident") + cliente.buscaClienteLogado());
 		aux = new JLabel("");
 	}
 

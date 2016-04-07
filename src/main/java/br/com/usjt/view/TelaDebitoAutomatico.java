@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 import br.com.usjt.utils.BundleUtils;
 import br.com.usjt.view.arq.Tela;
 import br.com.usjt.model.entidades.DebitoAutomaticoVO;
-import br.com.usjt.model.negocio.DebitoAutomatico;
+import br.com.usjt.model.negocio.DebitoAutomaticoBO;
 
 /**
  * Nome: TelaDebitoAutomatico
@@ -184,7 +184,7 @@ public class TelaDebitoAutomatico extends Tela {
 
 					if(processar)
 					{
-						DebitoAutomatico da = new DebitoAutomatico();
+						DebitoAutomaticoBO da = new DebitoAutomaticoBO();
 
 						boolean status = da.cadastrarDebito(debitoAutomatico);
 

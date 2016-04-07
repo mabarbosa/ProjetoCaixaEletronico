@@ -13,14 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import br.com.usjt.model.entidades.ClienteVO;
 import br.com.usjt.model.entidades.OperacaoVO;
 import br.com.usjt.model.entidades.ContaVO;
-import br.com.usjt.utils.DadosLogin;
-import br.com.usjt.model.jdbc.Conexao;
+import br.com.usjt.model.factory.ConnectionFactory;
+import br.com.usjt.security.DadosLogin;
 
 
 /**
@@ -38,25 +36,43 @@ public class OperacaoDAO {
 
 	/**
 	 * Nome:OperacaoDAO
-	 * <p>Propósito:Metodo Construtor </p>
+	 * <p>Propósito:Metodo Construtor padrão</p>
 	 * Data: <04/07/2015>
 	 * @author Sergio Teixeira<br>
 	 * copyright Copyright (c) 2013 <br> * </p>
 	 *
 	 */
 	public OperacaoDAO() {
-		try
-		{
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		this.conexao = ConnectionFactory.getConnection();
 	}
+	
+	/**
+	 * Nome: Contrutor com parametros
+	 * <p>Propósito: </p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param connection
+	 */
+	public OperacaoDAO(Connection connection) {
+		this.conexao = connection;
+	}
+	
 
-	public OperacaoVO getOperacao(int codOperacao)
+	/**
+	 * Nome: getOperacao
+	 * <p>Propósito: Metodo responsavel por buscar as operaçoes</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param codOperacao 
+	 * @return OperacaoVO
+	 */
+	public OperacaoVO getOperacao(Integer codOperacao)
 	{
 		ContaDAO contaDao = new ContaDAO();
 
@@ -89,6 +105,18 @@ public class OperacaoDAO {
 		return operacao;
 	}
 
+	/**
+	 * Nome: addOperacao
+	 * <p>Propósito: Metodo reponsavel por buscar as operaçoes</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param operacao OperacaoVO
+	 * @param conta ContaVO
+	 * @return OperacaoVO
+	 */
 	public OperacaoVO addOperacao(OperacaoVO operacao, ContaVO conta)
 	{
 		String sql = "INSERT INTO operacao (id_conta, dat, valor, tipo_operacao) VALUES(?, ?, ?, ?)";
@@ -101,9 +129,9 @@ public class OperacaoDAO {
 			ps.setDate(2, new java.sql.Date(operacao.getDate().getTime()));
 			ps.setDouble(3, operacao.getValor());
 			ps.setString(4, operacao.getTipoOperacao());
-			
+
 			ps.executeUpdate();
-			
+
 			ResultSet retorno = ps.getGeneratedKeys();
 			retorno.next();
 
@@ -120,6 +148,16 @@ public class OperacaoDAO {
 		return operacao;
 	}
 
+	/**
+	 * Nome: buscarOperacoes
+	 * <p>Propósito: buscarOperacoes </p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param conta ContaVO
+	 * @return List<OperacaoVO>
+	 */
 	public List<OperacaoVO> buscarOperacoes(ContaVO conta) {
 
 		String sql = "SELECT * FROM operacao where id_conta ="+ conta.getNumero() ;
@@ -151,32 +189,5 @@ public class OperacaoDAO {
         }
 
 		return list;
-	}
-
-	public String[][] getExtrato(ContaVO conta)
-	{
-		List<OperacaoVO> lista = buscarOperacoes(conta);
-
-		String[][] retorno = new String[lista.size()][4];
-
-		int contador = 0;
-
-		try
-		{
-			for(OperacaoVO operacao : lista)
-			{
-				String[] x = { operacao.getDate().toString(), operacao.getTipoOperacao().toString(), operacao.getCodigo().toString(), operacao.getValor().toString() };
-
-				retorno[contador] = x;
-
-				contador++;
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
-
-		return retorno;
 	}
 }

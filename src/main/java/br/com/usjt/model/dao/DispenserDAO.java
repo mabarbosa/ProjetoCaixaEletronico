@@ -14,9 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usjt.model.entidades.ClienteVO;
-import br.com.usjt.model.entidades.ContaVO;
-import br.com.usjt.model.jdbc.Conexao;
+import br.com.usjt.model.factory.ConnectionFactory;
 
 /**
  * Nome: DispenserDAO
@@ -40,19 +38,38 @@ public class DispenserDAO {
 	 * copyright Copyright (c) 2013 <br> * </p>
 	 *
 	 */
-		public DispenserDAO() {
-			try {
+	public DispenserDAO() {
 
-				Conexao data = new Conexao();
-				this.conexao = data.getConnection();
+		this.conexao = ConnectionFactory.getConnection();
+	}
 
-			} catch (Exception e) {
-				// TODO Trocar por log
-				e.printStackTrace();
-			}
-		}
+	/**
+	 * Nome: DispenserDAO
+	 * <p>Propósito: Metodo construtor com parametros</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param connection
+	 */
+	public DispenserDAO(Connection connection) {
 
-	public void mudaDispenser(int nota, int qtd)
+		this.conexao = connection;
+	}
+	
+	/**
+	 * Nome: mudaDispenser
+	 * <p>Propósito: Metodo reponsavel por mudar o dispenser </p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param nota Integer
+	 * @param qtd  Integer
+	 */
+	public void mudaDispenser(Integer nota, Integer qtd)
 	{
 		String sql = "UPDAtE dispenser set qtdeNota = (qtdeNota - ?) WHERE valorNota = ?";
 
@@ -73,6 +90,16 @@ public class DispenserDAO {
 		}
 	}
 
+	/**
+	 * Nome: getNotasDisponiveis
+	 * <p>Propósito: pega as notas disponiveis</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @return List<Integer>
+	 */
 	public List<Integer> getNotasDisponiveis()
 	{
 		String sql = "SELECT * FROM dispenser WHERE qtdeNota > 0 order by valorNota desc";

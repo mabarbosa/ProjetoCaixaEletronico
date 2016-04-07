@@ -11,14 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import br.com.usjt.model.entidades.ClienteVO;
-import br.com.usjt.model.entidades.ContaVO;
-import br.com.usjt.model.entidades.OperacaoVO;
-import br.com.usjt.model.jdbc.Conexao;
-
+import br.com.usjt.model.factory.ConnectionFactory;
 
 /**
  * Nome: SaqueDAO
@@ -44,22 +38,38 @@ public class SaqueDAO
 	 *
 	 */
 	public SaqueDAO() {
-		try {
-
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-
-		} catch (Exception e) {
-			// TODO Trocar por log
-			e.printStackTrace();
-		}
+		this.conexao = ConnectionFactory.getConnection();
+	}
+	
+	/**
+	 * Nome: SaqueDAO
+	 * <p>Propósito: Metodo construtor com parametros </p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param connection
+	 */
+	public SaqueDAO(Connection connection) {
+		this.conexao = ConnectionFactory.getConnection();
 	}
 
+	/**
+	 * Nome: getNotasDisponiveis
+	 * <p>Propósito: buscas todas as notas disponiveis</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @return String
+	 */
 	public String getNotasDisponiveis()
 	{
-		String retorno = "";
+		String retorno = null;
 
-		String sql = "SELECT * FROM dispenser WHERE qtdeNota > 0 order by valorNota";
+		String sql = "SELECT * FROM dispenser WHERE qtdeNota > 0 ORDER BY valorNota";
 
         try
         {

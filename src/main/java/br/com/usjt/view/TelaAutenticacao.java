@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.com.usjt.model.entidades.AutenticacaoVO;
-import br.com.usjt.model.negocio.Autenticacao;
+import br.com.usjt.model.negocio.AutenticacaoBO;
 import br.com.usjt.utils.BundleUtils;
 
 import br.com.usjt.view.arq.ComboBancoItem;
@@ -36,7 +36,7 @@ public class TelaAutenticacao extends JFrame {
 	private JLabel lSenha = null;
 	private JLabel lConta = null;
 	private JLabel lBanco = null;
-	private JComboBox<?> cBanco = null;
+//	private JComboBox<?> cBanco = null;
 
 	public TelaAutenticacao() {
 
@@ -50,7 +50,7 @@ public class TelaAutenticacao extends JFrame {
 		center.setBorder(new EmptyBorder(70, 70, 0, 70));
 
 		center.add(lBanco);
-		center.add(cBanco);
+//		center.add(cBanco);
 		center.add(lAgencia);
 		center.add(agencia);
 		center.add(lConta);
@@ -101,7 +101,7 @@ public class TelaAutenticacao extends JFrame {
 				new ComboBancoItem("1", "Banco 1"),
 				new ComboBancoItem("2", "Banco 2"),
 				new ComboBancoItem("3", "Banco 3") };
-		cBanco = new JComboBox(listaBancos);
+//		cBanco = new JComboBox(listaBancos);
 	}
 
 	public class AutenticacaoControl implements ActionListener
@@ -119,7 +119,7 @@ public class TelaAutenticacao extends JFrame {
 						&& objAuth.getConta() != null
 						&& objAuth.getSenha() != null) {
 
-					Autenticacao autenticacao = new Autenticacao();
+					AutenticacaoBO autenticacao = new AutenticacaoBO();
 
 					//valida o usuario
 					if (autenticacao.validaUsuario(objAuth))
@@ -166,8 +166,8 @@ public class TelaAutenticacao extends JFrame {
 
 			try {
 
-				String codBanco = ((ComboBancoItem) cBanco.getSelectedItem())
-						.getCodBanco();
+				String codBanco = null;//((ComboBancoItem) cBanco.getSelectedItem())
+//						.getCodBanco();
 				String s = String.valueOf(senha.getPassword());
 
 				if (codBanco == "")

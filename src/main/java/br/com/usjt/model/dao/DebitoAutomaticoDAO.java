@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import br.com.usjt.model.entidades.*;
-import br.com.usjt.model.jdbc.Conexao;
+import br.com.usjt.model.factory.ConnectionFactory;
 
 
 /**
@@ -31,18 +31,42 @@ public class DebitoAutomaticoDAO {
 	private Connection conexao = null;
 
 
-	public DebitoAutomaticoDAO()
-	{
-		try {
-
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	/**
+	 * Nome: 
+	 * <p>Propósito: Metodo construtor padrao</p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 */
+	public DebitoAutomaticoDAO() {
+		this.conexao = ConnectionFactory.getConnection();
 	}
-
+	
+	/**
+	 * Nome: DebitoAutomaticoDAO
+	 * <p>Propósito: Metodo construtor com parametros</p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param connection Connection
+	 */
+	public DebitoAutomaticoDAO(Connection connection) {
+		this.conexao = connection;
+	}
+	
+	/**
+	 * Nome: addDebitoAutomatico
+	 * <p>Propósito: Metodo responsavel por adicionar um debito automatico</p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param debito DebitoAutomaticoVO
+	 * @return boolean
+	 */
 	public boolean addDebitoAutomatico(DebitoAutomaticoVO debito)
 	{
 		boolean status = true;

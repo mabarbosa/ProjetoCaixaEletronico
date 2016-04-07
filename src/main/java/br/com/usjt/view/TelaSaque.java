@@ -5,23 +5,16 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
 
-import br.com.usjt.model.dao.ContaDAO;
-import br.com.usjt.model.dao.SaqueDAO;
-import br.com.usjt.model.negocio.Saque;
-import br.com.usjt.utils.BundleUtils;
-import br.com.usjt.view.TelaExtrato.ExtratoControl;
+import br.com.usjt.model.negocio.SaqueBO;
 import br.com.usjt.view.arq.Tela;
 
 /**
@@ -104,7 +97,7 @@ public class TelaSaque extends Tela {
 
 		this.buildObjects();
 
-		this.setTitle(BundleUtils.getString("titulo.tela.saque"));
+		//this.setTitle(BundleUtils.getString("titulo.tela.saque"));
 		JPanel center = new JPanel(new GridLayout(2, 1, 5, 5));
 		center.setBorder(new EmptyBorder(30, 30, -10, 30));
 
@@ -168,12 +161,12 @@ public class TelaSaque extends Tela {
 	private void buildObjects()
 	{
 
-		SaqueDAO saqueDao = new SaqueDAO();
+		//SaqueDAO saqueDao = new SaqueDAO();
 
-		dispenser = new JLabel(BundleUtils.getString("label.tela.saque.cedulas") + saqueDao.getNotasDisponiveis());
+//		dispenser = new JLabel(BundleUtils.getString("label.tela.saque.cedulas") + saqueDao.getNotasDisponiveis());
 
-		voltar = new JButton(BundleUtils.getString("botao.tela.voltar"));
-		sacar = new JButton(BundleUtils.getString("botao.tela.sacar"));
+		//voltar = new JButton(BundleUtils.getString("botao.tela.voltar"));
+		//sacar = new JButton(BundleUtils.getString("botao.tela.sacar"));
 
 		bt_01 = new JButton("R$ 20,00");
 		bt_02 = new JButton("R$ 50,00");
@@ -237,7 +230,7 @@ public class TelaSaque extends Tela {
 				{
 					Double valorSaque = Double.parseDouble(input.getText().replace(',', '.'));
 
-					Saque s = new Saque();
+					SaqueBO s = new SaqueBO();
 
 					if(s.executaSaque(valorSaque))
 					{
@@ -256,5 +249,9 @@ public class TelaSaque extends Tela {
 			}
 		}
 
+	}
+
+	public static void main(String[] args) {
+		new TelaSaque();
 	}
 }

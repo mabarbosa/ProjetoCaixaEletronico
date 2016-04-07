@@ -9,17 +9,13 @@ package br.com.usjt.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import br.com.usjt.model.entidades.ClienteVO;
 import br.com.usjt.model.entidades.ContaVO;
 import br.com.usjt.model.entidades.OperacaoVO;
 import br.com.usjt.model.entidades.TransferenciaVO;
-import br.com.usjt.model.jdbc.Conexao;
-import br.com.usjt.utils.DadosLogin;
+import br.com.usjt.model.factory.ConnectionFactory;
+import br.com.usjt.security.DadosLogin;
 
 /**
  * Nome: TransferenciaDAO
@@ -35,8 +31,12 @@ public class TransferenciaDAO {
 	 */
 	private Connection conexao = null;
 
-	
+
+	/**
+	 * DAO para a Operação
+	 */
 	private OperacaoDAO operacao = null;
+	
 	/**
 	 * Nome:TransferenciaDAO
 	 * <p>Propósito:Metodo Construtor </p>
@@ -46,17 +46,9 @@ public class TransferenciaDAO {
 	 *
 	 */
 	public TransferenciaDAO() {
-		
-		try {
 
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-			operacao = new OperacaoDAO();
-
-		} catch (Exception e) {
-			// TODO Trocar por log
-			e.printStackTrace();
-		}
+		this.conexao = ConnectionFactory.getConnection();
+		operacao = new OperacaoDAO();
 	}
 
 	/**
@@ -69,22 +61,22 @@ public class TransferenciaDAO {
 	 */
 	public  void cadastrar(TransferenciaVO transfencia)
     {
-		
+
 		try {
 			ContaVO contaDest = new ContaVO();
 			contaDest.setAgencia(transfencia.getAgenciaDestino());
 			contaDest.setNumero(transfencia.getContaDestino());
-			
+
 			ContaVO contaOrigem = new ContaVO();
 			contaOrigem.setAgencia(DadosLogin.agencia);
 			contaOrigem.setNumero(DadosLogin.conta);
 			operacao.addOperacao(((OperacaoVO)transfencia), contaDest);
 			operacao.addOperacao(((OperacaoVO)transfencia), contaOrigem);
-			
+
 	        String sql = "INSERT INTO TRANSFERENCIA (agencia_destino , conta_destino,) values(?,?)";
-	        
+
 	        PreparedStatement preparador = conexao.prepareStatement(sql);
-        
+
             preparador.setInt(1, transfencia.getAgenciaDestino());
             preparador.setInt(2, transfencia.getContaDestino());
             preparador.execute();//execulta o codigo sql

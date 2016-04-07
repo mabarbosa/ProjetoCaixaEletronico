@@ -13,8 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.usjt.model.entidades.ContaVO;
-import br.com.usjt.model.jdbc.Conexao;
-
+import br.com.usjt.model.factory.ConnectionFactory;
 
 /**
  * Nome: ContaDAO
@@ -32,27 +31,34 @@ public class ContaDAO {
 
 	/**
 	 * Nome:ContaDAO
-	 * <p>Propósito:Metodo Construtor </p>
+	 * <p>Propósito:Metodo Construtor Padrao </p>
 	 * Data: <04/07/2015>
 	 * @author Sergio Teixeira<br>
 	 * copyright Copyright (c) 2013 <br> * </p>
 	 *
 	 */
 	public ContaDAO() {
-		try {
-			
-			Conexao data = new Conexao();
-			this.conexao = data.getConnection();
-			
-		} catch (Exception e) {
-			// TODO Trocar por log
-			e.printStackTrace();
-		}
+
+		this.conexao = ConnectionFactory.getConnection();
 	}
 
 	/**
+	 * Nome: ContaDAO 
+	 * <p>Propósito: Metodo construtor com parametros </p>
+	 * <p>
+	 * Data: <05/04/2016>
+	 * @author sergio.junior  <br> 
+	 * copyright Copyright (c) 2015 <br> * </p>
+	 *
+	 * @param connection
+	 */
+	public ContaDAO(Connection connection) {
+		this.conexao = connection;
+	}
+	
+	/**
 	 * Nome: buscarTodos
-	 * <p>Propósito: Metodo reposanvel por exibir todos os registros </p>
+	 * <p>Propósito: Metodo reponsavel por exibir todos os registros </p>
 	 * Data: <04/07/2015>
 	 * @author Sergio Teixeira <br>
 	 * copyright Copyright (c) 2013 <br> * </p>
